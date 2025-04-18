@@ -67,6 +67,20 @@ function authCheck(env, url, request) {
     }
     return true;
 }
+export async function onRequestOptions(context) {
+    const { request, env } = context;
+
+    // 返回允许的 CORS 头
+    return new Response(null, {
+        status: 204, // No Content
+        headers: {
+            "Access-Control-Allow-Origin": "*", // 允许所有来源
+            "Access-Control-Allow-Methods": "POST, OPTIONS", // 允许的 HTTP 方法
+            "Access-Control-Allow-Headers": "Content-Type, Authorization, authCode, Referer", // 允许的请求头
+            "Access-Control-Max-Age": "86400" // 预检请求结果缓存时间（秒）
+        }
+    });
+}
 
 export async function onRequestPost(context) {  // Contents of context object
     const { request, env, params, waitUntil, next, data } = context;
