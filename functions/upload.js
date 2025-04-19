@@ -342,7 +342,9 @@ async function uploadFileToCloudflareR2(env, formdata, fullId, metadata, returnL
         JSON.stringify([{ 'src': `${returnLink}` }]), 
         {
             status: 200,
-            headers: { 'Content-Type': 'application/json' }
+            headers: { 'Content-Type': 'application/json',
+                "Access-Control-Allow-Origin": "*"
+		     }
         }
     );
 }
